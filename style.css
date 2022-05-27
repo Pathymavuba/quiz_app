@@ -473,8 +473,8 @@ i{
   }
   .positionlabel{
     position: relative;
-    left: 4px;
-    top:2px
+    left: 3px;
+    top:1px
     
   }
    .form-check {
@@ -496,13 +496,13 @@ i{
         color: #116fdb;
         border: 1px solid #116fdb;
         height: 50px;
-        margin-left :18px;;
+        margin-left :18px;
         font-size: 15px;
         box-shadow: 2px 2px 2px 1px gray;
   }
   .form-check-label{
-        font-size: 15px;
-        margin-left: 0px;
+        font-size: 11px;
+        
   }
   .form-check{
     margin-left: 3px;
@@ -511,10 +511,10 @@ i{
         font-size: 25px;
   }
   #name-result{
-    font-size: 25px;
+    font-size: 20px;
   }
   #email-result{
-    font-size: 20px;
+    font-size: 18px;
   }
    
 }
@@ -577,10 +577,7 @@ i{
         width: 80px;
         color: #116fdb;
         height: 30px;
-        margin-left :1px;;
-        align-items: center;
-        font-size: 10px;
-      
+
   }
   input[type=button] {
         width: 60px;
