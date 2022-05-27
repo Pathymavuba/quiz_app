@@ -69,10 +69,10 @@ input[type=button] {
 }
 input[type=radio]:checked
 {
-  /* -webkit-appearance:none; */
+  -webkit-appearance:none;
   background:green;
   outline: none;
-  box-shadow: 0px 0px 5px 0px white;
+  box-shadow:  none;
 }
 
 .question {

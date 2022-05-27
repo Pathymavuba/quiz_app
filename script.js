@@ -27,6 +27,7 @@ const btn_suivant = document.querySelector("#btn-suivant")
 const btn_quitter = document.querySelector("#btn-quitter")
 const son_check = new Audio("/checkson.mp3")
 const son_resultat = new Audio("/score.mp3")
+const sucess_result = new Audio("/success.mp3")
 
 // creation du tableau des objets(contenus de pages)
 let questions = [{
@@ -278,13 +279,15 @@ function Affichage_resultat()
     name_result.textContent = nom.value
     email_result.textContent = email.value
     score.textContent = score_obtenu;
-    son_resultat.play()
+    
 
     if (reussite > echec) {
         symbole_resultat.classList.add("fa-regular", "fa-circle-check", "couleur_reussite")
+        sucess_result.play()
     }
     else {
         symbole_resultat.classList.add("fa-regular", "fa-circle-xmark", "couleur_echec")
+        son_resultat.play()
     }
 }
 
