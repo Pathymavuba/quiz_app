@@ -25,6 +25,8 @@ let mouv = null
 let all_radio = document.querySelectorAll(".form-check-input")
 const btn_suivant = document.querySelector("#btn-suivant")
 const btn_quitter = document.querySelector("#btn-quitter")
+const son_check = new Audio("/checkson.mp3")
+const son_resultat = new Audio("/score.mp3")
 
 // creation du tableau des objets(contenus de pages)
 let questions = [{
@@ -256,15 +258,15 @@ btn_commencer.addEventListener("click", () => {
 // Au clic du radio button
 for (let i = 0; i < 4; i++) {
  all_radio[i].addEventListener("change", () => {
-   btn_suivant.disabled = false
+     btn_suivant.disabled = false
+     son_check.play()
+   // reinitialisation de la bordure verte des radio
      if (document.querySelector('.form-check.valid')) {
             document.querySelector('.form-check.valid').classList.remove('valid');
         }  
      if (all_radio[i].checked == true) {
             reaction_reponse[i].classList.add("valid")
-            // all_radio[i].classList.add("validradio") 
         }
-
     })
 }
 
@@ -276,6 +278,7 @@ function Affichage_resultat()
     name_result.textContent = nom.value
     email_result.textContent = email.value
     score.textContent = score_obtenu;
+    son_resultat.play()
 
     if (reussite > echec) {
         symbole_resultat.classList.add("fa-regular", "fa-circle-check", "couleur_reussite")
@@ -284,29 +287,12 @@ function Affichage_resultat()
         symbole_resultat.classList.add("fa-regular", "fa-circle-xmark", "couleur_echec")
     }
 }
-// id =1
-// function obtentionscore(id){
-//     parcours(id)
-//     radio_checked(id)
-//     if (reponse_choisie == true) {
-//         reussite++
-//         echec = Math.abs(reussite - max)
-//         score_obtenu = reussite + "/15"
-//     }
-//     if (reponse_choisie == false) {
-//         score_obtenu = reussite + "/15"
-//     }
 
-//     id++;
-//     return score_obtenu
-// }
-
-// parcours de toutes les pages
 id = 1;
 reussite = 0;
 max = 15;
 btn_suivant.addEventListener("click", function (event) {
-    // reinitialisation de couleur des radio
+    // reinitialisation de la bordure verte des radio
     if (document.querySelector('.form-check.valid')) {
         document.querySelector('.form-check.valid').classList.remove('valid');
     }
