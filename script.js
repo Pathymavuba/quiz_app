@@ -25,9 +25,10 @@ let mouv = null
 let all_radio = document.querySelectorAll(".form-check-input")
 const btn_suivant = document.querySelector("#btn-suivant")
 const btn_quitter = document.querySelector("#btn-quitter")
-const son_check = new Audio("/checkson.mp3")
-const son_resultat = new Audio("/score.mp3")
-const sucess_result = new Audio("/success.mp3")
+const son_check = new Audio("/checkson_sound.mp3")
+const son_resultat = new Audio("/score_sound.mp3")
+const sucess_resultat = new Audio("/success.mp3")
+
 
 // creation du tableau des objets(contenus de pages)
 let questions = [{
@@ -282,10 +283,12 @@ function Affichage_resultat()
     
 
     if (reussite > echec) {
+     
         symbole_resultat.classList.add("fa-regular", "fa-circle-check", "couleur_reussite")
-        sucess_result.play()
+        sucess_resultat.play()
     }
     else {
+      
         symbole_resultat.classList.add("fa-regular", "fa-circle-xmark", "couleur_echec")
         son_resultat.play()
     }
