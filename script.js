@@ -146,7 +146,7 @@ let n_qst = document.getElementById("n_qst")
 let v1; let v2; let v3; let v4
 // parcours de pages     
 
-function parcours(id) {
+function questionnaire(id) {
     qst.textContent = questions[id].q;
     n_qst.textContent = questions[id].nq;
     label1.textContent = questions[id].rep[0].text;
@@ -192,10 +192,9 @@ function recuperation(){
     return monId;  
 }
 // fonction progress and timer
-function run() {
+function gestion_progress() {
     if (mouv) {
         clearInterval(mouv)
-
     }
     let innerbar = document.querySelector(".innerbar")
     let counter = 60
@@ -207,12 +206,21 @@ function run() {
             clearInterval(mouv)
             if(id<15){
             let idParcours = recuperation ()
-            parcours(idParcours+1) 
+            questionnaire(idParcours+1) 
+            radio_checked(id - 1)
             if (document.querySelector('.form-check.valid')) {
                 document.querySelector('.form-check.valid').classList.remove('valid');
             }  
+            if (reponse_choisie == true) {
+                reussite++
+                echec = Math.abs(reussite - max)
+                score_obtenu = reussite + "/15"
+            }
+            if (reponse_choisie == false) {
+                score_obtenu = reussite + "/15"
+            }
             inititalisationradio()
-            run() 
+            gestion_progress()
             id++
             }  
                      
@@ -223,7 +231,6 @@ function run() {
         }
 
         else {
-            console.log(counter)
             timer.textContent = counter;
             innerbar.style.width = counter * 1.6667 + "%"
         }
@@ -233,13 +240,40 @@ function run() {
 
 }
 
-
-
-
+//Affichage de la page-resultat
+function Affichage_resultat()
+{
+    form2.style.display = "none"
+    form17.style.display = "block"
+    name_result.textContent = nom.value
+    email_result.textContent = email.value
+    score.textContent = score_obtenu;
+    if (reussite > echec) {
+        symbole_resultat.classList.add("fa-regular", "fa-circle-check", "couleur_reussite")
+        sucess_resultat.play()
+    }
+    else {
+        symbole_resultat.classList.add("fa-regular", "fa-circle-xmark", "couleur_echec")
+        son_resultat.play()
+    }
+}
+// Au clic du radio button
+for (let i = 0; i < 4; i++) {
+    all_radio[i].addEventListener("change", () => {
+        btn_suivant.disabled = false
+        son_check.play()
+      // reinitialisation de la bordure verte des radio
+        if (document.querySelector('.form-check.valid')) {
+               document.querySelector('.form-check.valid').classList.remove('valid');
+           }  
+        if (all_radio[i].checked == true) {
+               reaction_reponse[i].classList.add("valid")
+           }
+       })
+   }
 btn_commencer.addEventListener("click", () => {
 
     // gestion de validation coté client
-    // validation nom
     let position = email.value.indexOf("@gmail.com")
     let name = nom.value
     if (((nom.value == "")||(name.length <= 3))||((email.value == "")|| (position == -1)) ){
@@ -251,49 +285,11 @@ btn_commencer.addEventListener("click", () => {
     else {
         form1.classList.add("disappear")
         form2.style.display = "block"
-        run()
-        parcours(0)
+        gestion_progress()
+        questionnaire(0)
     }
 
 })
-
-// Au clic du radio button
-for (let i = 0; i < 4; i++) {
- all_radio[i].addEventListener("change", () => {
-     btn_suivant.disabled = false
-     son_check.play()
-   // reinitialisation de la bordure verte des radio
-     if (document.querySelector('.form-check.valid')) {
-            document.querySelector('.form-check.valid').classList.remove('valid');
-        }  
-     if (all_radio[i].checked == true) {
-            reaction_reponse[i].classList.add("valid")
-        }
-    })
-}
-
-//Affichage de la page-resultat
-function Affichage_resultat()
-{
-    form2.style.display = "none"
-    form17.style.display = "block"
-    name_result.textContent = nom.value
-    email_result.textContent = email.value
-    score.textContent = score_obtenu;
-    
-
-    if (reussite > echec) {
-     
-        symbole_resultat.classList.add("fa-regular", "fa-circle-check", "couleur_reussite")
-        sucess_resultat.play()
-    }
-    else {
-      
-        symbole_resultat.classList.add("fa-regular", "fa-circle-xmark", "couleur_echec")
-        son_resultat.play()
-    }
-}
-
 id = 1;
 reussite = 0;
 max = 15;
@@ -302,7 +298,7 @@ btn_suivant.addEventListener("click", function (event) {
     if (document.querySelector('.form-check.valid')) {
         document.querySelector('.form-check.valid').classList.remove('valid');
     }
-    run()
+    gestion_progress()
     btn_suivant.disabled = true;
     if (id < 15) {
        
@@ -315,7 +311,7 @@ btn_suivant.addEventListener("click", function (event) {
         if (reponse_choisie == false) {
             score_obtenu = reussite + "/15"
         }
-        parcours(id)
+        questionnaire(id)
         id++;
 
     }
@@ -326,6 +322,7 @@ btn_suivant.addEventListener("click", function (event) {
     }
 
 })
+
 // quitter et avoir le score
 
 btn_quitter.addEventListener("click", () => {
@@ -336,7 +333,6 @@ btn_quitter.addEventListener("click", () => {
 
 const btn_accueil = document.getElementById("btn-accueil")
 btn_accueil.addEventListener("click", () => {
-
     form17.style.display = "none"
     form2.style.display = "none"
     form1.style.display = "block"
