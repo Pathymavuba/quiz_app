@@ -13,14 +13,6 @@ body {
   margin-top: 20px;
 }
 
- /* .form-control{
-   outline: brown;
- } */
-
-/* #page1 {
-  display: none;
-} */
-
 .disappear {
   display: none;
 }
@@ -102,7 +94,7 @@ input[type='radio']:checked:before {
   margin-left: 10px;
 }
 
-#page2 {
+#page_question{
   display: none;
 }
 
@@ -176,7 +168,7 @@ input[type="button"]:enabled
         transform: scaleX(0);
   }
 } */
-#page17 {
+#page_resultat{
   display: flex;
   flex-direction: column;
   display: none;
@@ -344,6 +336,7 @@ i{
   font-size: 180px;
 }
 }
+
 
 
 @media (max-width:710px){
