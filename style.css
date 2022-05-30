@@ -211,6 +211,7 @@ input[type="button"]:enabled
   height: 100%;
   position: relative;
   border-radius: 16px;
+  transition: all 1s;
 }
 
 @media (max-width: 1200px){
