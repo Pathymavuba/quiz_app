@@ -152,22 +152,6 @@ input[type="button"]:enabled
   flex-direction: row;
   justify-content: space-between;
 }
-
-/* .progress-bar {
-
-  animation-duration: 75s;
-  animation-name: progress-bar;
-}
-
-@keyframes progress-bar {
-  0% {
-        transform: scaleX(215);
-  }
-
-  100% {
-        transform: scaleX(0);
-  }
-} */
 #page_resultat{
   display: flex;
   flex-direction: column;
