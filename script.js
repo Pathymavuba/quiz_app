@@ -147,6 +147,7 @@ function questionnaire(id) {
     label3.textContent = questions[id].rep[2].text;
     label4.textContent = questions[id].rep[3].text;
 }
+
 function inititalisationradio(){
     all_radio[0].checked = false
     all_radio[1].checked = false
@@ -258,19 +259,47 @@ for (let i = 0; i < 4; i++) {
 btn_commencer.addEventListener("click", () => {
     let position = email.value.indexOf("@gmail.com")
     let name = nom.value
-    if (((nom.value == "")||(name.length <= 3))||((email.value == "")|| (position == -1)) ){
-        nom.classList.add("error")
-        mssg[0].style.display = "block"
-        email.classList.add("error")
-        mssg[1].style.display = "block"
+    let modif = true
+    if ((nom.value == "")||(name.length < 3)||(email.value == "")||(position == -1)){
+        if (nom.value == "") {
+            nom.classList.add("error")
+            mssg[0].style.display = "block"  
+        }
+        else if (name.length < 3){
+            nom.classList.add("error")
+            mssg[0].textContent = "renseigner nom ayant au moins deux caractères"
+            mssg[0].style.display = "block"
+        }
+        else{
+            mssg[0].textContent= ""
+            mssg[0].style.display = "block" 
+            nom.classList.remove("error") 
+        }
+        if (email.value == ""){
+            email.classList.add("error")
+            mssg[1].style.display = "block"
+        }
+        else if (position == -1){
+            email.classList.add("error")
+            mssg[1].textContent = "renseigner un mail correct"
+            mssg[1].style.display = "block"
+        }
+        else {
+             
+            email.classList.remove("error")
+            mssg[1].textContent= ""
+            mssg[1].style.display = "block" 
+           
+        }
+    
     }
-    else {
+    else{
         form1.classList.add("disappear")
         form2.style.display = "block"
         gestion_progress()
         questionnaire(0)
     }
-
+   
 })
 id = 1;
 reussite = 0;
