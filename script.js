@@ -205,6 +205,9 @@ function gestion_progress() {
             if (reponse_choisie == false) {
                 score_obtenu = reussite + "/15"
             }
+            if(id == 14 ){
+                btn_suivant.value = "Terminer"
+            }
             inititalisationradio()
             gestion_progress()
             id++
@@ -287,6 +290,9 @@ btn_suivant.addEventListener("click", function (event) {
         }
         if (reponse_choisie == false) {
             score_obtenu = reussite + "/15"
+        }
+        if(id == 14 ){
+            btn_suivant.value = "Terminer"
         }
         questionnaire(id)
         id++;
