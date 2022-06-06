@@ -9,6 +9,16 @@ body {
   margin: 0;
 }
 
+@keyframes disparition {
+  0%{
+    margin-left: 100%;
+  }
+
+  100% {
+    margin-left: 30%;
+  }
+}
+
 .page {
   border: 1px white solid;
   width: 35%;
@@ -16,7 +26,9 @@ body {
   background: #FFFFFF;
   margin: auto;
   margin-top: 20px;
+  animation: disparition 2s;
 }
+
 
 .disappear {
   display: none;
